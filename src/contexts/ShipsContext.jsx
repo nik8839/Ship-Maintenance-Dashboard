@@ -1,14 +1,3 @@
-<<<<<<< HEAD
-import React from 'react'
-
-const ShipsContext = () => {
-  return (
-    <div>ShipsContext</div>
-  )
-}
-
-export default ShipsContext
-=======
 import { createContext, useContext, useState, useEffect } from 'react';
 import { getFromLocalStorage, setToLocalStorage } from '../utils/localStorageUtils';
 
@@ -36,12 +25,71 @@ export const ShipsProvider = ({ children }) => {
     setShips(newShips);
   };
 
+const addComponentToShip = (shipId, newComponent) => {
+  setShips(prevShips => {
+    const updatedShips = prevShips.map(ship => {
+      if (ship.id === shipId) {
+        return {
+          ...ship,
+          components: [...(ship.components || []), newComponent],
+        };
+      }
+      return ship;
+    });
+    localStorage.setItem("ships", JSON.stringify(updatedShips));
+    return updatedShips;
+  });
+};
+
+const editComponentInShip = (shipId, componentId, updatedData) => {
+  setShips(prevShips => {
+    const updatedShips = prevShips.map(ship => {
+      if (ship.id === shipId) {
+        return {
+          ...ship,
+          components: ship.components.map(c =>
+            c.id === componentId ? { ...c, ...updatedData } : c
+          ),
+        };
+      }
+      return ship;
+    });
+    localStorage.setItem("ships", JSON.stringify(updatedShips));
+    return updatedShips;
+  });
+};
+
+const deleteComponentFromShip = (shipId, componentId) => {
+  setShips(prevShips => {
+    const updatedShips = prevShips.map(ship => {
+      if (ship.id === shipId) {
+        return {
+          ...ship,
+          components: ship.components.filter(c => c.id !== componentId),
+        };
+      }
+      return ship;
+    });
+    localStorage.setItem("ships", JSON.stringify(updatedShips));
+    return updatedShips;
+  });
+};
+
+
+
   return (
-    <ShipsContext.Provider value={{ ships, addShip, updateShip, deleteShip }}>
+    <ShipsContext.Provider value={{
+  ships,
+  addShip,
+  updateShip,
+  deleteShip,
+  addComponentToShip,
+  editComponentInShip,
+  deleteComponentFromShip,
+}}>
       {children}
     </ShipsContext.Provider>
   );
 };
 
 export const useShips = () => useContext(ShipsContext);
->>>>>>> context
