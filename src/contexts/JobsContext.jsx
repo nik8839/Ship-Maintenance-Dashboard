@@ -1,9 +1,10 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
-
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { useNotifications } from "../contexts/NotificationContext";
 const JobsContext = createContext();
 
 export const JobsProvider = ({ children }) => {
   const [jobs, setJobs] = useState([]);
+  const { addNotification } = useNotifications();
 
   useEffect(() => {
     const storedJobs = JSON.parse(localStorage.getItem("jobs")) || [];
@@ -18,6 +19,9 @@ export const JobsProvider = ({ children }) => {
   const addJob = (job) => {
     const updatedJobs = [...jobs, job];
     saveJobs(updatedJobs);
+    addNotification(
+      `Job of type "${job.type}" added for component ID: ${job.componentId}`
+    );
   };
 
   const updateJob = (jobId, updatedFields) => {
@@ -25,11 +29,13 @@ export const JobsProvider = ({ children }) => {
       job.id === jobId ? { ...job, ...updatedFields } : job
     );
     saveJobs(updatedJobs);
+    addNotification(`Job with ID: ${jobId} updated successfully.`);
   };
 
   const deleteJob = (jobId) => {
     const updatedJobs = jobs.filter((job) => job.id !== jobId);
     saveJobs(updatedJobs);
+    addNotification(`Job with ID: ${jobId} deleted.`);
   };
 
   return (

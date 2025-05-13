@@ -9,7 +9,7 @@ const ShipList = () => {
   return (
     <div className="p-4">
       <h2 className="text-2xl mb-4 font-bold">Ships</h2>
-      <button className="btn" onClick={() => navigate('/ships/new')}>Add Ship</button>
+      <button  className="btn cursor-pointer" onClick={() => navigate('/ships/new')}>Add Ship</button>
       <table className="table-auto w-full mt-4 border">
         <thead>
           <tr>
@@ -18,15 +18,16 @@ const ShipList = () => {
         </thead>
         <tbody>
           {ships.map(ship => (
-            <tr key={ship.id}>
-              <td>{ship.name}</td>
-              <td>{ship.imo}</td>
-              <td>{ship.flag}</td>
-              <td>{ship.status}</td>
+            <tr className='text-center' key={ship.id}>
+              <td className='text-center'>{ship.name}</td>
+              <td className='text-center'>{ship.imo}</td>
+              <td className='text-center'>{ship.flag}</td>
+              <td className='text-center'>{ship.status}</td>
               <td>
-                <button onClick={() => navigate(`/ships/${ship.id}`)}>View</button>
-                <button onClick={() => navigate(`/ships/edit/${ship.id}`)}>Edit</button>
-                <button onClick={() => deleteShip(ship.id)}>Delete</button>
+                <button className='mr-2 cursor-pointer' onClick={() => navigate(`/ships/${ship.id}`)}>View </button>
+                
+                <button className='mr-2 cursor-pointer' onClick={() => navigate(`/ships/edit/${ship.id}`)}>Edit  </button>
+                <button  className='mr-2 cursor-pointer' onClick={() => deleteShip(ship.id)}>Delete   </button>
               </td>
             </tr>
           ))}

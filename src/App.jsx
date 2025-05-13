@@ -14,6 +14,9 @@ import ShipForm from "./components/Ships/ShipForm";
 import ShipDetail from "./components/Ships/ShipDetail";
 import { JobsProvider } from "./contexts/JobsContext";
 import JobsPage from "./pages/JobsPage";
+import { NotificationProvider } from "./contexts/NotificationContext";
+import NotificationCenter from "./components/Notifications/NotificationCenter";
+import MaintenanceCalendarPage from "./pages/MaintenanceCalendarPage";
 
 const PrivateRoute = ({ children }) => {
   const { user } = useAuth();
@@ -25,52 +28,70 @@ function App() {
     <Router>
       <AuthProvider>
         <ShipsProvider>
-          <JobsProvider>
-          <Routes>
-            <Route path="/" element={<LoginForm />} />
-            <Route
-              path="/dashboard"
-              element={
-                <PrivateRoute>
-                  <DashboardPage />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/ships"
-              element={
-                <PrivateRoute>
-                  <ShipsPage />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/ships/new"
-              element={
-                <PrivateRoute>
-                  <ShipForm />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/ships/edit/:id"
-              element={
-                <PrivateRoute>
-                  <ShipForm />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path="/ships/:id"
-              element={
-                <PrivateRoute>
-                  <ShipDetail />
-                </PrivateRoute>
-              }
-            />
-            <Route path="/jobs" element={<PrivateRoute><JobsPage /></PrivateRoute>} />
-          </Routes>
-          </JobsProvider>
+          <NotificationProvider>
+            <JobsProvider>
+              <NotificationCenter />
+              <Routes>
+                <Route path="/" element={<LoginForm />} />
+                <Route
+                  path="/dashboard"
+                  element={
+                    <PrivateRoute>
+                      <DashboardPage />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path="/ships"
+                  element={
+                    <PrivateRoute>
+                      <ShipsPage />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path="/ships/new"
+                  element={
+                    <PrivateRoute>
+                      <ShipForm />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path="/ships/edit/:id"
+                  element={
+                    <PrivateRoute>
+                      <ShipForm />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path="/ships/:id"
+                  element={
+                    <PrivateRoute>
+                      <ShipDetail />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path="/jobs"
+                  element={
+                    <PrivateRoute>
+                      <JobsPage />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path="/calendar"
+                  element={
+                    <PrivateRoute>
+                      <MaintenanceCalendarPage />
+                    </PrivateRoute>
+                  }
+                />
+              </Routes>
+            </JobsProvider>
+          </NotificationProvider>
         </ShipsProvider>
       </AuthProvider>
     </Router>
