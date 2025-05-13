@@ -20,44 +20,81 @@ const [name, setName] = useState('')
     }
   };
   return (
-    <>
-    <div className='text-center font-bold text-3xl p-2.5 m-2.5'>LoginForm</div>
-    <div className='w-1/2 mx-auto mt-5   rounded-lg p-5'>
-        <form onSubmit={SubmitHandler} className="max-w-sm mx-auto p-4 border">
-        <div className=" text-xl mb-3">
-            <label htmlFor="name" className="form-label">Name: </label>
-            <input type="text" className="form-control text-black border-2 border-blue-900" id="name" value={name} onChange={(e) => setName(e.target.value)}/>
+    <div className="min-h-screen bg-gradient-to-br from-blue-100 via-blue-50 to-white flex items-center justify-center px-4">
+      <div className="bg-white rounded-2xl shadow-lg w-full max-w-md p-6">
+        <h2 className="text-3xl font-bold text-center text-blue-900 mb-6">
+          Ship Maintenance Login
+        </h2>
+        <form onSubmit={SubmitHandler} className="space-y-4">
+          <div>
+            <label htmlFor="name" className="block text-blue-800 text-lg font-semibold">
+              Name
+            </label>
+            <input
+              type="text"
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="w-full mt-1 p-2 border border-blue-300 rounded-lg text-black focus:ring focus:ring-blue-200"
+            />
+          </div>
+
+          <div>
+            <label className="block text-blue-800 text-lg font-semibold mb-1">Role</label>
+            <div className="flex gap-4">
+              {['admin', 'inspector', 'engineer'].map((r) => (
+                <label key={r} className="flex items-center gap-1 text-blue-700">
+                  <input
+                    type="radio"
+                    name="role"
+                    value={r}
+                    onChange={(e) => setRole(e.target.value)}
+                  />
+                  {r.charAt(0).toUpperCase() + r.slice(1)}
+                </label>
+              ))}
             </div>
-            <div className='text-xl mb-3'>
-            <label className="form-label">Role</label>
-            <div>
-                <input type='radio' id="admin" name="role" value="admin" onChange={(e) => setRole(e.target.value)} />
-                <label htmlFor="admin" className="form-check-label">Admin</label>
-            </div>
-            <div>
-                <input type='radio' id="inspector" name="role" value="inspector" onChange={(e) => setRole(e.target.value)}/>
-                <label htmlFor="inspector" className="form-check-label">Inspector</label>
-            </div>
-            <div>
-                <input type='radio' id="engineer" name="role" value="engineer" onChange={(e) => setRole(e.target.value)}/>
-                <label htmlFor="engineer" className="form-check-label">Engineer</label>
-            </div>
-        </div>
-            <div className="text-xl mb-3">
-            <label htmlFor="email" className="form-label">Email address: </label>
-            <input type="email" className="form-control text-black border-2 border-blue-900" id="email" aria-describedby="emailHelp" value={email} onChange={(e) => setEmail(e.target.value)}/>
-            <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
-            </div>
-            <div className="text-xl mb-3">
-            <label htmlFor="password" className="form-label">Password: </label>
-            <input type="password" className="form-control text-black border-2 border-blue-900" id="password"  value={password} onChange={(e) => setPassword(e.target.value)}/>
-            </div>
-            <button type="submit" className="btn btn-primary cursor-pointer " >Submit</button>
+          </div>
+
+          <div>
+            <label htmlFor="email" className="block text-blue-800 text-lg font-semibold">
+              Email address
+            </label>
+            <input
+              type="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full mt-1 p-2 border border-blue-300 rounded-lg text-black focus:ring focus:ring-blue-200"
+            />
+            <p className="text-sm text-gray-500 mt-1">
+              We'll never share your email with anyone else.
+            </p>
+          </div>
+
+          <div>
+            <label htmlFor="password" className="block text-blue-800 text-lg font-semibold">
+              Password
+            </label>
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full mt-1 p-2 border border-blue-300 rounded-lg text-black focus:ring focus:ring-blue-200"
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="w-full bg-blue-800 text-white py-2 rounded-lg hover:bg-blue-900 transition cursor-pointer"
+          >
+            Submit
+          </button>
         </form>
+      </div>
     </div>
-    </>
-    
-  )
+  );
 }
 
 export default LoginForm
