@@ -19,9 +19,16 @@ import JobsPage from "./pages/JobsPage";
 import { NotificationProvider } from "./contexts/NotificationContext";
 import NotificationCenter from "./components/Notifications/NotificationCenter";
 import MaintenanceCalendarPage from "./pages/MaintenanceCalendarPage";
+import UnauthorizedPage from "./pages/UnauthorizedPage";
 
 const PrivateRoute = ({ children }) => {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
+  console.log("PrivateRoute - user:", user, "loading:", loading);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
   return user ? children : <Navigate to="/" />;
 };
 
@@ -96,6 +103,9 @@ function App() {
                     </PrivateRoute>
                   }
                 />
+
+                {/* Unauthorized route should be last */}
+                <Route path="/unauthorized" element={<UnauthorizedPage />} />
               </Routes>
             </JobsProvider>
           </NotificationProvider>

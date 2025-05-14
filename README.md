@@ -58,6 +58,10 @@ Follow these steps to set up and run the application locally:
    npm run preview
    ```
 
+## Important Note for Testing Roles
+
+When testing the application with different roles (Admin, Inspector, Engineer), ensure you open a **new browser window** or use **incognito/private browsing mode** for each role. This is necessary because the application uses local storage for session management, and using the same browser window can cause conflicts between roles.
+
 ## Login Details
 
 To access the application, use the following credentials based on your role:
@@ -103,7 +107,6 @@ Below are some screenshots of the application:
 ### Ships Page
 
 ![Ships Page](./src/assets/ship_maintenance.PNG)
-
 
 ### Jobs Page
 

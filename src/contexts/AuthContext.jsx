@@ -4,6 +4,7 @@ import {
   setToLocalStorage,
   removeFromLocalStorage,
 } from "../utils/localStorageUtils";
+import { hasPermission } from "../utils/roleUtils";
 
 const AuthContext = createContext();
 
@@ -43,17 +44,23 @@ export const AuthProvider = ({ children }) => {
     const loggedInUsers = getFromLocalStorage("loggedInUsers") || [];
     setToLocalStorage("loggedInUsers", loggedInUsers); // Initialize logged-in users if not present
     const storedUser = getFromLocalStorage("user");
+    console.log("AuthContext - storedUser:", storedUser);
     if (storedUser) {
       setUser(storedUser);
     }
     setLoading(false);
   }, []);
 
+  useEffect(() => {
+    console.log("AuthContext - user role:", user?.role);
+  }, [user]);
+
   const login = (email, password) => {
     const storedUsers = getFromLocalStorage("users") || USERS;
     const foundUser = storedUsers.find(
       (user) => user.email === email && user.password === password
     );
+    console.log("AuthContext - login foundUser:", foundUser);
     if (foundUser) {
       setUser(foundUser);
       setToLocalStorage("user", foundUser); // Store only the logged-in user
@@ -80,8 +87,15 @@ export const AuthProvider = ({ children }) => {
     removeFromLocalStorage("user");
   };
 
+  const checkPermission = (permission) => {
+    if (!user || !user.role) return false;
+    return hasPermission(user.role, permission);
+  };
+
   return (
-    <AuthContext.Provider value={{ user, loading, login, logout }}>
+    <AuthContext.Provider
+      value={{ user, loading, login, logout, checkPermission }}
+    >
       {children}
     </AuthContext.Provider>
   );

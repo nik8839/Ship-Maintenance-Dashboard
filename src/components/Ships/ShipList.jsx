@@ -1,14 +1,19 @@
 import React, { useContext } from "react";
 import { useShips } from "../../contexts/ShipsContext";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
 
 const ShipList = () => {
   const { ships, deleteShip } = useShips();
   const navigate = useNavigate();
+  const { checkPermission } = useAuth();
 
   return (
     <div className="p-4">
       <h2 className="text-2xl mb-4 font-bold">Ships</h2>
+      {checkPermission("canManageShips") && (
+        <button className="mb-4">Add Ship</button>
+      )}
       <table className="table-auto w-full mt-4 border">
         <thead>
           <tr>
@@ -34,18 +39,22 @@ const ShipList = () => {
                   View{" "}
                 </button>
 
-                <button
-                  className="mr-2 cursor-pointer mt-2"
-                  onClick={() => navigate(`/ships/edit/${ship.id}`)}
-                >
-                  Edit{" "}
-                </button>
-                <button
-                  className="mr-2 cursor-pointer mt-2"
-                  onClick={() => deleteShip(ship.id)}
-                >
-                  Delete{" "}
-                </button>
+                {checkPermission("canManageShips") && (
+                  <>
+                    <button
+                      className="mr-2 cursor-pointer mt-2"
+                      onClick={() => navigate(`/ships/edit/${ship.id}`)}
+                    >
+                      Edit{" "}
+                    </button>
+                    <button
+                      className="mr-2 cursor-pointer mt-2"
+                      onClick={() => deleteShip(ship.id)}
+                    >
+                      Delete{" "}
+                    </button>
+                  </>
+                )}
               </td>
             </tr>
           ))}
