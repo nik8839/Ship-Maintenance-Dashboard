@@ -90,7 +90,7 @@ Below are some screenshots of the application:
 
 ### Dashboard
 
-![Dashboard](.src/assets/dashboard.PNG)
+![Dashboard](./src/assets/dashboard.PNG)
 
 ### Component Page
 
