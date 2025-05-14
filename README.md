@@ -86,28 +86,28 @@ Below are some screenshots of the application:
 
 ### Login Page
 
-![Login Page](./Frontend/src/assets/login.PNG)
+![Login Page](./src/assets/login.PNG)
 
 ### Dashboard
 
-![Dashboard](./Frontend/src/assets/dashboard.PNG)
+![Dashboard](.src/assets/dashboard.PNG)
 
 ### Component Page
 
-![Component Page](./Frontend/src/assets/view_ship.PNG)
+![Component Page](./src/assets/view_ship.PNG)
 
 ### Calendar
 
-![Calendar](./Frontend/src/assets/calendar.PNG)
+![Calendar](./src/assets/calendar.PNG)
 
 ### Ships Page
 
-![Ships Page](./Frontend/src/assets/ship_maintenance.PNG)
+![Ships Page](./src/assets/ship_maintenance.PNG)
 
 
 ### Jobs Page
 
-![Ships Page](./Frontend/src/assets/jobs.PNG)
+![Ships Page](./src/assets/jobs.PNG)
 
 ---
 
