@@ -46,7 +46,7 @@ const ShipForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className="p-4">
-      <h2>{isEdit ? "Edit Ship" : "Add Ship"}</h2>
+      {/* <h2>{isEdit ? "Edit Ship" : "Add Ship"}</h2> */}
       <input
         value={form.name}
         onChange={(e) => setForm({ ...form, name: e.target.value })}

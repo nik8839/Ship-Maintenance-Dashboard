@@ -11,9 +11,9 @@ const ShipList = () => {
   return (
     <div className="p-4">
       <h2 className="text-2xl mb-4 font-bold">Ships</h2>
-      {checkPermission("canManageShips") && (
+      {/* {checkPermission("canManageShips") && (
         <button className="mb-4">Add Ship</button>
-      )}
+      )} */}
       <table className="table-auto w-full mt-4 border">
         <thead>
           <tr>
