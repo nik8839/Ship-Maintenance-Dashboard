@@ -1,6 +1,6 @@
 // src/pages/ShipDetailPage.jsx
 import React, { useContext } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { useShips } from "../../contexts/ShipsContext";
 import ComponentList from "../Components/ComponentList";
 
@@ -36,9 +36,15 @@ const ShipDetailPage = () => {
 
       <div className="border p-4 rounded shadow">
         <h2 className="text-2xl font-bold mb-2">{ship.name}</h2>
-        <p><strong>IMO Number:</strong> {ship.imo}</p>
-        <p><strong>Flag:</strong> {ship.flag}</p>
-        <p><strong>Status:</strong> {ship.status}</p>
+        <p>
+          <strong>IMO Number:</strong> {ship.imo}
+        </p>
+        <p>
+          <strong>Flag:</strong> {ship.flag}
+        </p>
+        <p>
+          <strong>Status:</strong> {ship.status}
+        </p>
       </div>
 
       <ComponentList shipId={ship.id} />

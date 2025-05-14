@@ -1,22 +1,27 @@
-import React from 'react'
-import { useState } from 'react'
-import { useAuth } from '../../contexts/AuthContext'
-import {useNavigate} from 'react-router-dom'
+import React, { useEffect } from "react";
+import { useState } from "react";
+import { useAuth } from "../../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 const LoginForm = () => {
-const [name, setName] = useState('')
- const [role, setRole] = useState('')
- const [email, setEmail] = useState('')
- const [password, setPassword] = useState('')
-  const { login } = useAuth();
+  const [name, setName] = useState("");
+  const [role, setRole] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { login, user } = useAuth();
   const navigate = useNavigate();
 
- const SubmitHandler = (e) => {
+  useEffect(() => {
+    if (user) {
+      navigate("/dashboard");
+    }
+  }, [user, navigate]);
 
-     e.preventDefault();
+  const SubmitHandler = (e) => {
+    e.preventDefault();
     if (login(email, password)) {
-      navigate('/dashboard');
+      navigate("/dashboard");
     } else {
-      alert('Invalid credentials');
+      alert("Invalid credentials");
     }
   };
   return (
@@ -27,7 +32,10 @@ const [name, setName] = useState('')
         </h2>
         <form onSubmit={SubmitHandler} className="space-y-4">
           <div>
-            <label htmlFor="name" className="block text-blue-800 text-lg font-semibold">
+            <label
+              htmlFor="name"
+              className="block text-blue-800 text-lg font-semibold"
+            >
               Name
             </label>
             <input
@@ -40,10 +48,15 @@ const [name, setName] = useState('')
           </div>
 
           <div>
-            <label className="block text-blue-800 text-lg font-semibold mb-1">Role</label>
+            <label className="block text-blue-800 text-lg font-semibold mb-1">
+              Role
+            </label>
             <div className="flex gap-4">
-              {['admin', 'inspector', 'engineer'].map((r) => (
-                <label key={r} className="flex items-center gap-1 text-blue-700">
+              {["admin", "inspector", "engineer"].map((r) => (
+                <label
+                  key={r}
+                  className="flex items-center gap-1 text-blue-700"
+                >
                   <input
                     type="radio"
                     name="role"
@@ -57,7 +70,10 @@ const [name, setName] = useState('')
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-blue-800 text-lg font-semibold">
+            <label
+              htmlFor="email"
+              className="block text-blue-800 text-lg font-semibold"
+            >
               Email address
             </label>
             <input
@@ -73,7 +89,10 @@ const [name, setName] = useState('')
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-blue-800 text-lg font-semibold">
+            <label
+              htmlFor="password"
+              className="block text-blue-800 text-lg font-semibold"
+            >
               Password
             </label>
             <input
@@ -95,6 +114,6 @@ const [name, setName] = useState('')
       </div>
     </div>
   );
-}
+};
 
-export default LoginForm
+export default LoginForm;

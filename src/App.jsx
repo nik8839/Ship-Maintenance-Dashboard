@@ -1,9 +1,11 @@
 // App.jsx
+import "./App.css";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
+  Link,
 } from "react-router-dom";
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
 import { ShipsProvider } from "./contexts/ShipsContext";
@@ -31,16 +33,37 @@ function App() {
           <NotificationProvider>
             <JobsProvider>
               <NotificationCenter />
+              <header className="bg-gray-800 text-white p-4 flex justify-between items-center">
+                <div className="flex-1 text-center">
+                  <h1 className="text-xl font-bold">Ship Maintenance</h1>
+                </div>
+                <nav className="flex-none">
+                  <Link
+                    to="/dashboard"
+                    className="text-white hover:underline px-4"
+                  >
+                    Home
+                  </Link>
+                </nav>
+              </header>
               <Routes>
                 <Route path="/" element={<LoginForm />} />
+
                 <Route
-                  path="/dashboard"
+                  path="/dashboard/*"
                   element={
                     <PrivateRoute>
                       <DashboardPage />
                     </PrivateRoute>
                   }
-                />
+                >
+                  <Route path="jobs" element={<JobsPage />} />
+                  <Route
+                    path="calendar"
+                    element={<MaintenanceCalendarPage />}
+                  />
+                </Route>
+
                 <Route
                   path="/ships"
                   element={
@@ -70,22 +93,6 @@ function App() {
                   element={
                     <PrivateRoute>
                       <ShipDetail />
-                    </PrivateRoute>
-                  }
-                />
-                <Route
-                  path="/jobs"
-                  element={
-                    <PrivateRoute>
-                      <JobsPage />
-                    </PrivateRoute>
-                  }
-                />
-                <Route
-                  path="/calendar"
-                  element={
-                    <PrivateRoute>
-                      <MaintenanceCalendarPage />
                     </PrivateRoute>
                   }
                 />

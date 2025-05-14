@@ -3,11 +3,13 @@ import { useJobs } from "../../contexts/JobsContext";
 import { useAuth } from "../../contexts/AuthContext";
 import { useShips } from "../../contexts/ShipsContext";
 import { getFromLocalStorage } from "../../utils/localStorageUtils";
+import { useNotifications } from "../../contexts/NotificationContext";
 
 const JobForm = () => {
   const { addJob } = useJobs();
   const { user } = useAuth();
   const { ships } = useShips();
+  const { addNotification } = useNotifications();
   const components = ships.flatMap((ship) => ship.components || []);
   const users = getFromLocalStorage("loggedInUsers") || [];
 
@@ -39,6 +41,7 @@ const JobForm = () => {
       shipId: selectedComponent.shipId,
     };
     addJob(job);
+    addNotification("Job added successfully!", "success");
     setForm({
       componentId: "",
       type: "",

@@ -1,0 +1,65 @@
+/* App.css */
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to bottom right, #d7eef1, #b2ebf2, #84cad6);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+button,
+.btn {
+    border: 2px solid #000;
+    /* Add a black border */
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    /* Rounded corners */
+    background-color: #ffffffb2;
+    /* Default white background */
+    color: #000;
+    /* Black text */
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+button,
+.btn,
+.hover\:bg-blue-600,
+.hover\:bg-green-600,
+.hover\:bg-purple-600,
+.hover\:bg-red-600 {
+    transition: background-color 0.3s ease;
+}
+
+button:hover,
+.btn:hover {
+    background-color: #f0f0f097;
+    /* Light gray hover background */
+    border-color: #888;
+    /* Change border color on hover */
+}
+
+button:hover,
+.btn:hover,
+.hover\:bg-blue-600:hover {
+    background-color: #93c5fd;
+    /* Light Blue hover color */
+}
+
+.hover\:bg-green-600:hover {
+    background-color: #bbf7d0;
+    /* Light Green hover color */
+}
+
+.hover\:bg-purple-600:hover {
+    background-color: #e9d5ff;
+    /* Light Purple hover color */
+}
+
+.hover\:bg-red-600:hover {
+    background-color: #fecaca;
+    /* Light Red hover color */
+}
